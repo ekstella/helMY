@@ -50,7 +50,15 @@ export default function HomeScreen() {
           <ThemedText type="title" style={styles.title}>
             Welcome to&nbsp;helMY
           </ThemedText>
-          <MapView style={styles.map}/>
+          <MapView 
+          style={styles.map}
+          initialRegion={{
+            latitude: 60.17083,
+            longitude: 24.93750,
+            latitudeDelta: 0.2,
+            longitudeDelta: 0.2,
+          }}
+          />
         </ThemedView>
 
         {Platform.OS === "web" && <WebBadge />}
