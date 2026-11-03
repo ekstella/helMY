@@ -5,6 +5,7 @@ import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { WebBadge } from "@/components/web-badge";
 import { BottomTabInset, MaxContentWidth, Spacing } from "@/constants/theme";
+import MapView from 'react-native-maps';
 
 function getDevMenuHint() {
   if (Platform.OS === "web") {
@@ -33,6 +34,7 @@ export default function HomeScreen() {
           <ThemedText type="title" style={styles.title}>
             Welcome to&nbsp;helMY
           </ThemedText>
+          <MapView style={styles.map}/>
         </ThemedView>
 
         {Platform.OS === "web" && <WebBadge />}
@@ -74,5 +76,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.three,
     paddingVertical: Spacing.four,
     borderRadius: Spacing.four,
+  },
+  map: {
+    width: '350',
+    height: '430',
   },
 });
