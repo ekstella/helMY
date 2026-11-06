@@ -5,8 +5,8 @@ import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { WebBadge } from "@/components/web-badge";
 import { BottomTabInset, MaxContentWidth, Spacing } from "@/constants/theme";
-import MapView, { Marker } from 'react-native-maps';
-import * as Location from 'expo-location';
+import MapView, { Marker } from "react-native-maps";
+import * as Location from "expo-location";
 import { useEffect, useState } from "react";
 
 function getDevMenuHint() {
@@ -29,13 +29,15 @@ function getDevMenuHint() {
 }
 
 export default function HomeScreen() {
-  const [location, setLocation] = useState<Location.LocationObject | null>(null);
+  const [location, setLocation] = useState<Location.LocationObject | null>(
+    null
+  );
 
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
-        Alert.alert('No permission to get location')
+      if (status !== "granted") {
+        Alert.alert("No permission to get location");
         return;
       }
       let location = await Location.getCurrentPositionAsync({});
@@ -50,15 +52,23 @@ export default function HomeScreen() {
           <ThemedText type="title" style={styles.title}>
             Welcome to&nbsp;helMY
           </ThemedText>
-          <MapView 
-          style={styles.map}
-          initialRegion={{
-            latitude: 60.17083,
-            longitude: 24.93750,
-            latitudeDelta: 0.2,
-            longitudeDelta: 0.2,
-          }}
-          />
+          <MapView
+            style={styles.map}
+            initialRegion={{
+              latitude: 60.17083,
+              longitude: 24.9675,
+              latitudeDelta: 0.2,
+              longitudeDelta: 0.2,
+            }}
+          >
+            <Marker
+              coordinate={{
+                latitude: 60.201373,
+                longitude: 24.934041,
+              }}
+              title="You are here :)"
+            />
+          </MapView>
         </ThemedView>
 
         {Platform.OS === "web" && <WebBadge />}
@@ -102,7 +112,7 @@ const styles = StyleSheet.create({
     borderRadius: Spacing.four,
   },
   map: {
-    width: '350',
-    height: '430',
+    width: "350",
+    height: "430",
   },
 });
