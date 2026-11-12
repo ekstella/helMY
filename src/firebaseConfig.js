@@ -7,7 +7,8 @@ import { getAnalytics } from "firebase/analytics";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: process.env.EXPO_PUBLIC_API_KEY,
+  apiKey: process.env.EXPO_PUBLIC_FIREBASE_API_KEY,
+  databaseURL: "https://helmy-a9382-default-rtdb.europe-west1.firebasedatabase.app/",
   authDomain: "helmy-a9382.firebaseapp.com",
   projectId: "helmy-a9382",
   storageBucket: "helmy-a9382.firebasestorage.app",
@@ -16,6 +17,8 @@ const firebaseConfig = {
   measurementId: "G-KXYFREQM4C"
 };
 
+
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+export default app;

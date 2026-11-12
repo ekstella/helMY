@@ -12,6 +12,7 @@ import { FAB } from "react-native-paper";
 import React from "react";
 import { FontAwesomeFreeSolid } from "@react-native-vector-icons/fontawesome-free-solid";
 import { useRouter } from "expo-router";
+import { initializeApp } from "firebase/app";
 
 
 export default function HomeScreen() {
