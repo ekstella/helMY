@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { FAB, Title, AnimatedFAB } from "react-native-paper";
 import React from "react";
 import { FontAwesomeFreeSolid } from "@react-native-vector-icons/fontawesome-free-solid";
+import { useRouter } from "expo-router";
 
 function getDevMenuHint() {
   if (Platform.OS === "web") {
@@ -35,6 +36,8 @@ export default function HomeScreen() {
   const [location, setLocation] = useState<Location.LocationObject | null>(
     null
   );
+  
+  const router = useRouter();
 
   useEffect(() => {
     (async () => {
@@ -75,13 +78,13 @@ export default function HomeScreen() {
           <FAB
             icon={({ size, color }) => (
               <FontAwesomeFreeSolid
-                name="plus"
+                name="heart"
                 size={size}
                 color={color}
               />
             )}
             label="Add post"
-            onPress={() => console.log("Pressed")}
+            onPress={() => router.push("/post-screen")}
             visible={true}
             style={styles.fab}
           ></FAB>
@@ -128,8 +131,8 @@ const styles = StyleSheet.create({
     borderRadius: Spacing.four,
   },
   map: {
-    width: "350",
-    height: "430",
+    width: 350,
+    height: 430,
   },
   fab: {
     position: "absolute",
