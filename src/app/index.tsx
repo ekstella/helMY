@@ -1,16 +1,5 @@
 import * as Device from "expo-device";
-import {
-  ActivityIndicator,
-  Alert,
-  Platform,
-  StyleSheet,
-  Animated,
-  StyleProp,
-  ViewStyle,
-  I18nManager,
-  ScrollView,
-  Text,
-} from "react-native";
+import { Alert, Platform, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
@@ -46,8 +35,6 @@ export default function HomeScreen() {
   const [location, setLocation] = useState<Location.LocationObject | null>(
     null
   );
-
-  const [isExtended, setIsExtended] = useState(true);
 
   useEffect(() => {
     (async () => {
@@ -86,7 +73,13 @@ export default function HomeScreen() {
             />
           </MapView>
           <FAB
-            icon="plus"
+            icon={({ size, color }) => (
+              <FontAwesomeFreeSolid
+                name="plus"
+                size={size}
+                color={color}
+              />
+            )}
             label="Add post"
             onPress={() => console.log("Pressed")}
             visible={true}
