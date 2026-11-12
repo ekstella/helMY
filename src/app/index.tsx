@@ -7,7 +7,9 @@ import {
   Animated,
   StyleProp,
   ViewStyle,
-  I18nManager
+  I18nManager,
+  ScrollView,
+  Text,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ThemedText } from "@/components/themed-text";
@@ -18,6 +20,8 @@ import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
 import { useEffect, useState } from "react";
 import { FAB, Title, AnimatedFAB } from "react-native-paper";
+import React from "react";
+import { PaperProvider } from "react-native-paper";
 
 function getDevMenuHint() {
   if (Platform.OS === "web") {
@@ -42,6 +46,8 @@ export default function HomeScreen() {
   const [location, setLocation] = useState<Location.LocationObject | null>(
     null
   );
+
+  const [isExtended, setIsExtended] = useState(true);
 
   useEffect(() => {
     (async () => {
@@ -79,7 +85,16 @@ export default function HomeScreen() {
               title="You are here :)"
             />
           </MapView>
-          <FAB icon="plus" style={styles.fab}></FAB>
+          <AnimatedFAB
+            icon="plus"
+            label="Add post"
+            extended={isExtended}
+            onPress={() => console.log("Pressed")}
+            visible={true}
+            animateFrom="right"
+            iconMode="static"
+            style={styles.fab}
+          ></AnimatedFAB>
         </ThemedView>
 
         {Platform.OS === "web" && <WebBadge />}
