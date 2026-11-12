@@ -1,16 +1,42 @@
 import { ThemedView } from "@/components/themed-view";
-import { Keyboard, StyleSheet, TouchableWithoutFeedback } from "react-native";
+import {
+  Alert,
+  Keyboard,
+  StyleSheet,
+  TouchableWithoutFeedback,
+} from "react-native";
 import { Text, Button } from "react-native-paper";
 import { useRouter } from "expo-router";
 import { ThemedText } from "@/components/themed-text";
 import { BottomTabInset, MaxContentWidth, Spacing } from "@/constants/theme";
 import { TextInput } from "react-native-paper";
 import * as React from "react";
+import { app } from "./firebaseConfig";
+import { getDatabase, ref, push } from "firebase/database";
 
 export default function PostScreen() {
   const router = useRouter();
 
   const [text, setText] = React.useState("");
+
+  type Post = {
+    title: string;
+  };
+
+  const [post, setPost] = React.useState<Post>({
+    title: "",
+  });
+  const [paragraph, setParagraph] = React.useState<Post[]>([]);
+
+  const handleSave = () => {
+    if (post.title) {
+      push(ref(database, "items/"), post);
+    } else {
+      Alert.alert("Error", "Type post first");
+    }
+  };
+
+  const database = getDatabase(app);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -21,9 +47,9 @@ export default function PostScreen() {
         <ThemedView>
           <TextInput
             style={styles.input}
-            label="Write here..."
-            value={text}
-            onChangeText={(text) => setText(text)}
+            placeholder="Write your post here..."
+            onChangeText={(text) => setPost({ ...post, title: text })}
+            value={post.title}
           ></TextInput>
         </ThemedView>
       </ThemedView>
