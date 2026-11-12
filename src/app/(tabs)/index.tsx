@@ -8,7 +8,7 @@ import { BottomTabInset, MaxContentWidth, Spacing } from "@/constants/theme";
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
 import { useEffect, useState } from "react";
-import { FAB, Title, AnimatedFAB } from "react-native-paper";
+import { FAB } from "react-native-paper";
 import React from "react";
 import { FontAwesomeFreeSolid } from "@react-native-vector-icons/fontawesome-free-solid";
 import { useRouter } from "expo-router";
@@ -49,13 +49,15 @@ export default function HomeScreen() {
               longitudeDelta: 0.2,
             }}
           >
+            {location && (
             <Marker
               coordinate={{
-                latitude: 60.201373,
-                longitude: 24.934041,
+                latitude: location?.coords.latitude,
+                longitude: location.coords.longitude,
               }}
               title="You are here :)"
             />
+  )}
           </MapView>
           <FAB
             icon={({ size, color }) => (

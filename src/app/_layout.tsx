@@ -10,7 +10,7 @@ export default function RootLayout() {
       />
 
       <Stack.Screen
-        name="create"
+        name="post-screen"
         options={{
           title: "Create a post",
           headerShown: true,
