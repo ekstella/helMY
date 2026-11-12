@@ -21,7 +21,7 @@ import * as Location from "expo-location";
 import { useEffect, useState } from "react";
 import { FAB, Title, AnimatedFAB } from "react-native-paper";
 import React from "react";
-import { PaperProvider } from "react-native-paper";
+import { FontAwesomeFreeSolid } from "@react-native-vector-icons/fontawesome-free-solid";
 
 function getDevMenuHint() {
   if (Platform.OS === "web") {
@@ -85,16 +85,13 @@ export default function HomeScreen() {
               title="You are here :)"
             />
           </MapView>
-          <AnimatedFAB
+          <FAB
             icon="plus"
             label="Add post"
-            extended={isExtended}
             onPress={() => console.log("Pressed")}
             visible={true}
-            animateFrom="right"
-            iconMode="static"
             style={styles.fab}
-          ></AnimatedFAB>
+          ></FAB>
         </ThemedView>
 
         {Platform.OS === "web" && <WebBadge />}
@@ -143,7 +140,7 @@ const styles = StyleSheet.create({
   },
   fab: {
     position: "absolute",
-    right: 10,
+    right: 4,
     bottom: 30,
     margin: 35,
   },
