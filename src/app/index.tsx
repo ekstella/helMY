@@ -1,5 +1,14 @@
 import * as Device from "expo-device";
-import { Alert, Platform, StyleSheet } from "react-native";
+import {
+  ActivityIndicator,
+  Alert,
+  Platform,
+  StyleSheet,
+  Animated,
+  StyleProp,
+  ViewStyle,
+  I18nManager
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
@@ -8,6 +17,7 @@ import { BottomTabInset, MaxContentWidth, Spacing } from "@/constants/theme";
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
 import { useEffect, useState } from "react";
+import { FAB, Title, AnimatedFAB } from "react-native-paper";
 
 function getDevMenuHint() {
   if (Platform.OS === "web") {
@@ -69,6 +79,7 @@ export default function HomeScreen() {
               title="You are here :)"
             />
           </MapView>
+          <FAB icon="plus" style={styles.fab}></FAB>
         </ThemedView>
 
         {Platform.OS === "web" && <WebBadge />}
@@ -114,5 +125,11 @@ const styles = StyleSheet.create({
   map: {
     width: "350",
     height: "430",
+  },
+  fab: {
+    position: "absolute",
+    right: 10,
+    bottom: 30,
+    margin: 35,
   },
 });
