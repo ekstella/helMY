@@ -1,17 +1,33 @@
 import { ThemedView } from "@/components/themed-view";
-import { StyleSheet } from "react-native";
+import { Keyboard, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import { Text, Button } from "react-native-paper";
 import { useRouter } from "expo-router";
 import { ThemedText } from "@/components/themed-text";
 import { BottomTabInset, MaxContentWidth, Spacing } from "@/constants/theme";
+import { TextInput } from "react-native-paper";
+import * as React from "react";
 
 export default function PostScreen() {
   const router = useRouter();
 
+  const [text, setText] = React.useState("");
+
   return (
-    <ThemedView style={styles.container}>
-      <ThemedText type="title" style={styles.title}>Create a post</ThemedText>
-    </ThemedView>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <ThemedView style={styles.container}>
+        <ThemedText type="title" style={styles.title}>
+          Create a post
+        </ThemedText>
+        <ThemedView>
+          <TextInput
+            style={styles.input}
+            label="Write here..."
+            value={text}
+            onChangeText={(text) => setText(text)}
+          ></TextInput>
+        </ThemedView>
+      </ThemedView>
+    </TouchableWithoutFeedback>
   );
 }
 
@@ -19,7 +35,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    flexDirection: "row",
+    flexDirection: "column",
+    alignItems: "center",
   },
   safeArea: {
     flex: 1,
@@ -38,7 +55,7 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: "center",
-    paddingTop: 150,
+    paddingBottom: 50,
   },
   code: {
     textTransform: "uppercase",
@@ -59,5 +76,13 @@ const styles = StyleSheet.create({
     right: 4,
     bottom: 30,
     margin: 35,
+  },
+  input: {
+    height: 60,
+    width: 180,
+    borderColor: "white",
+    borderWidth: 1,
+    color: "black",
+    textAlign: "center",
   },
 });
