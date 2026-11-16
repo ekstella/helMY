@@ -12,7 +12,7 @@ import { FAB } from "react-native-paper";
 import React from "react";
 import { FontAwesomeFreeSolid } from "@react-native-vector-icons/fontawesome-free-solid";
 import { useRouter } from "expo-router";
-import { initializeApp } from "firebase/app";
+import { getDatabase, ref, onValue } from "@firebase/database";
 
 export default function HomeScreen() {
   const [location, setLocation] = useState<Location.LocationObject | null>(
@@ -20,6 +20,26 @@ export default function HomeScreen() {
   );
 
   const router = useRouter();
+
+  const db = getDatabase();
+
+  type Post = {
+    title: string;
+    locationLongitude: number;
+    locationLatitude: number;
+    createdAt: number;
+  };
+
+  const [posts, setPosts] = React.useState<Post[]>([]);
+
+  useEffect(() => {
+    console.log("pieru");
+    const unsubscribe = onValue(ref(db, "posts"), (snapshot) => {
+      const posts = Object.values(snapshot.val()) as Post[];
+      console.log(posts);
+      setPosts(posts);
+    });
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -58,6 +78,18 @@ export default function HomeScreen() {
                 title="You are here :)"
               />
             )}
+            {posts &&
+              posts.map((post) => {
+                return (
+                  <Marker
+                    coordinate={{
+                      latitude: post.locationLatitude,
+                      longitude: post.locationLongitude,
+                    }}
+                    title={post.title}
+                  ></Marker>
+                );
+              })}
           </MapView>
           <FAB
             icon={({ size, color }) => (

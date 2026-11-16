@@ -16,7 +16,6 @@ import { app } from "../firebaseConfig";
 import { getDatabase, ref, push } from "firebase/database";
 import { LocationObject } from "expo-location";
 import { useSearchParams } from "expo-router/build/hooks/useSearchParams.js";
-//import { initializeApp } from "firebase/app";
 
 export default function PostScreen() {
   let searchParams = useSearchParams();
