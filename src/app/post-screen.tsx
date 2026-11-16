@@ -14,21 +14,28 @@ import { TextInput } from "react-native-paper";
 import * as React from "react";
 import { app } from "../firebaseConfig";
 import { getDatabase, ref, push } from "firebase/database";
+import { LocationObject } from "expo-location";
+import { useSearchParams } from "expo-router/build/hooks/useSearchParams.js";
 //import { initializeApp } from "firebase/app";
 
 export default function PostScreen() {
-  const router = useRouter();
+  let searchParams = useSearchParams();
+  let longitude = Number(searchParams.get("longitude"));
+  let latitude = Number(searchParams.get("latitude"));
 
-  //const [text, setText] = React.useState("");
+  const router = useRouter();
 
   type Post = {
     title: string;
+    locationLongitude: number;
+    locationLatitude: number;
   };
 
   const [post, setPost] = React.useState<Post>({
     title: "",
+    locationLatitude: latitude,
+    locationLongitude: longitude,
   });
-  //const [paragraph, setParagraph] = React.useState<Post[]>([]);
 
   const handleSave = async () => {
     if (!post.title.trim()) {
@@ -40,11 +47,17 @@ export default function PostScreen() {
       await push(ref(database, "posts"), {
         title: post.title.trim(),
         createdAt: Date.now(),
+        locationLatitude: latitude,
+        locationLongitude: longitude,
       });
 
       Alert.alert("Success", "Your post has been saved!");
 
-      setPost({ title: "" });
+      setPost({
+        title: "",
+        locationLatitude: latitude,
+        locationLongitude: longitude,
+      });
     } catch (error) {
       console.error("Firebase save error:", error);
       Alert.alert("Error", "Could not save your post.");

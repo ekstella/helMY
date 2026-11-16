@@ -14,12 +14,11 @@ import { FontAwesomeFreeSolid } from "@react-native-vector-icons/fontawesome-fre
 import { useRouter } from "expo-router";
 import { initializeApp } from "firebase/app";
 
-
 export default function HomeScreen() {
   const [location, setLocation] = useState<Location.LocationObject | null>(
     null
   );
-  
+
   const router = useRouter();
 
   useEffect(() => {
@@ -51,25 +50,25 @@ export default function HomeScreen() {
             }}
           >
             {location && (
-            <Marker
-              coordinate={{
-                latitude: location?.coords.latitude,
-                longitude: location.coords.longitude,
-              }}
-              title="You are here :)"
-            />
-  )}
+              <Marker
+                coordinate={{
+                  latitude: location?.coords.latitude,
+                  longitude: location.coords.longitude,
+                }}
+                title="You are here :)"
+              />
+            )}
           </MapView>
           <FAB
             icon={({ size, color }) => (
-              <FontAwesomeFreeSolid
-                name="heart"
-                size={size}
-                color={color}
-              />
+              <FontAwesomeFreeSolid name="heart" size={size} color={color} />
             )}
             label="Add post"
-            onPress={() => router.push("/post-screen")}
+            onPress={() =>
+              router.push(
+                `/post-screen?longitude=${location?.coords.longitude}&latitude=${location?.coords.latitude}`
+              )
+            }
             visible={true}
             style={styles.fab}
           ></FAB>
