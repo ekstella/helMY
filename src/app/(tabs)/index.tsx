@@ -33,7 +33,6 @@ export default function HomeScreen() {
   const [posts, setPosts] = React.useState<Post[]>([]);
 
   useEffect(() => {
-    console.log("pieru");
     const unsubscribe = onValue(ref(db, "posts"), (snapshot) => {
       const posts = Object.values(snapshot.val()) as Post[];
       console.log(posts);

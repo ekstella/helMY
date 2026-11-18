@@ -118,13 +118,6 @@ const styles = StyleSheet.create({
   code: {
     textTransform: "uppercase",
   },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: "stretch",
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
-  },
   map: {
     width: 350,
     height: 430,
