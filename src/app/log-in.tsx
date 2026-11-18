@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import {
   View,
   Text,
@@ -15,40 +15,63 @@ import * as SecureStore from "expo-secure-store";
 import SignUp from "./sign-up";
 import { ThemedView } from "@/components/themed-view";
 import { Spacing } from "@/constants/theme";
+import { useAuth } from "@/contexts/AuthContext";
+
+type Props = {
+  setIsLoggedIn?: Dispatch<SetStateAction<boolean>>;
+};
 
 export default function LogIn() {
-  const [status, setStatus] = React.useState(false);
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [authenticated, setAuthenticated] = React.useState(false);
-  const auth = getAuth(app);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
-    if (email == "" || password == "") {
-      return alert("Password and email are required");
+  const { user } = useAuth();
+
+  const handleLogin = async () => {
+    if (!email.trim() || !password) {
+      alert("Email and password are required");
+      return;
     }
 
-    signInWithEmailAndPassword(auth, email, password)
-      .then(async (userCredentials) => {
-        const user = userCredentials.user;
+    try {
+      await signInWithEmailAndPassword(getAuth(app), email.trim(), password);
 
-        await SecureStore.setItemAsync("user", JSON.stringify(user));
-        setAuthenticated(true);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+      // onAuthStateChanged will update the shared user state.
+      alert("Login successful!");
+    } catch (error: any) {
+      console.error("Login error:", error);
+      alert(error.message);
+    }
   };
+
+
+
+  //   const [email, setEmail] = React.useState("");
+  //   const [password, setPassword] = React.useState("");
+  //   const [authenticated, setAuthenticated] = React.useState(false);
+  //   const auth = getAuth(app);
+
+  //   const handleLogin = () => {
+  //     if (email == "" || password == "") {
+  //       return alert("Password and email are required");
+  //     }
+
+  //     signInWithEmailAndPassword(auth, email, password)
+  //       .then(async (userCredentials) => {
+  //         const user = userCredentials.user;
+
+  //         await SecureStore.setItemAsync("user", JSON.stringify(user));
+  //         setAuthenticated(true);
+  //       })
+  //       .catch((e) => {
+  //         console.log(e);
+  //       });
+  //   };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <ThemedView style={styles.container}>
-        {authenticated ? (
-          <ThemedView>
-            <Text style={styles.title}>You are now logged in</Text>
-          </ThemedView>
-        ) : (
-          <>
+
             <Text style={styles.title}>Log in Here</Text>
             <TextInput
               placeholder="Enter Email"
@@ -67,7 +90,6 @@ export default function LogIn() {
                 <Text style={styles.buttonText}>Log In</Text>
               </Pressable>
             </ThemedView>
-          </>
         )}
       </ThemedView>
     </TouchableWithoutFeedback>

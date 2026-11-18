@@ -5,34 +5,52 @@ import app from '@/firebaseConfig';
 import { ThemedView } from '@/components/themed-view';
 import { Spacing } from '@/constants/theme';
 import { ThemedText } from '@/components/themed-text';
+import { useAuth } from '@/contexts/AuthContext';
 
+export default function ProfileScreen() {
+    const { user, logout } = useAuth();
 
-type Props = {};
-
-const auth = getAuth(app);
-
-const Profile = (props: Props) => {
-    const handleLogout = () => {
-        signOut(auth);
+    const handleLogout = async () => {
+        try {
+            await logout();
+        } catch (error: any) {
+            console.error("Logout error: ", error);
+            alert(error.message);
+        }
     };
+
 
     return (
         <ThemedView style={styles.container}>
-            <ThemedText style={styles.title}>
-                Hello, {auth?.currentUser?.email}
-            </ThemedText>
-            <ThemedView style={styles.buttonRow}>
-                <Pressable style={styles.button} onPress={handleLogout}>
-                    <Text style={styles.buttonText}>
-                        Log out
-                    </Text>
-                </Pressable>
-            </ThemedView>
+            {user ? (
+                <>
+                    <ThemedText style={styles.title}>
+                        Hello, {user.email}!
+                    </ThemedText>
+
+                    <ThemedText>
+                        Your user ID: {user.uid}
+                    </ThemedText>
+
+                    <ThemedView style={styles.buttonRow}>
+                        <Pressable
+                        style={styles.button}
+                        onPress={handleLogout}
+                        >
+                            <Text style={styles.buttonText}>
+                                Log out
+                            </Text>
+                        </Pressable>
+                    </ThemedView>
+                </>
+            ) : (
+                <ThemedText style={styles.title}>
+                    You are not logged in
+                </ThemedText>
+            )}
         </ThemedView>
     );
-};
-
-export default Profile;
+}
 
 const styles = StyleSheet.create({
     scrollView: {
