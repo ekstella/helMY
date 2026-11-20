@@ -25,9 +25,6 @@ export default function ProfileScreen() {
       {user ? (
         <>
           <ThemedText style={styles.title}>Hello, {user.email}!</ThemedText>
-
-          <ThemedText>Your user ID: {user.uid}</ThemedText>
-
           <ThemedView style={styles.buttonRow}>
             <Pressable style={styles.button} onPress={handleLogout}>
               <Text style={styles.buttonText}>Log out</Text>
@@ -82,6 +79,7 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: "center",
+    fontSize: 26,
   },
   input: {
     height: 100,

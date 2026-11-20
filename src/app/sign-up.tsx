@@ -13,6 +13,7 @@ import {
 import { ThemedText } from "@/components/themed-text";
 import { Spacing } from "@/constants/theme";
 import { getDatabase, ref, set } from "firebase/database";
+import { router } from "expo-router";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -46,13 +47,6 @@ export default function SignUp() {
       console.error("Registration error:", error);
       alert(error.message);
     }
-    // createUserWithEmailAndPassword(auth, email, password)
-    //   .then(() => {
-    //     alert("User created successfully");
-    //   })
-    //   .catch((e) => {
-    //     alert(e.message);
-    //   });
   };
 
   return (
@@ -72,7 +66,15 @@ export default function SignUp() {
           textContentType="password"
         ></TextInput>
         <ThemedView style={styles.buttonRow}>
-          <Pressable style={styles.button} onPress={handleRegister}>
+          <Pressable
+            style={styles.button}
+            onPress={() => {
+              {
+                handleRegister;
+              }
+              router.push("/log-in");
+            }}
+          >
             <Text style={styles.buttonText}>Register</Text>
           </Pressable>
         </ThemedView>

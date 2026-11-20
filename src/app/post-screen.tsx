@@ -16,6 +16,7 @@ import { app } from "../firebaseConfig";
 import { getDatabase, ref, push } from "firebase/database";
 import { LocationObject } from "expo-location";
 import { useSearchParams } from "expo-router/build/hooks/useSearchParams.js";
+import { uuid } from "expo";
 
 export default function PostScreen() {
   let searchParams = useSearchParams();
@@ -25,6 +26,7 @@ export default function PostScreen() {
   const router = useRouter();
 
   type Post = {
+    id: string
     title: string;
     locationLongitude: number;
     locationLatitude: number;
@@ -34,6 +36,7 @@ export default function PostScreen() {
     title: "",
     locationLatitude: latitude,
     locationLongitude: longitude,
+    id: uuid.v4(),
   });
 
   const handleSave = async () => {
@@ -48,6 +51,7 @@ export default function PostScreen() {
         createdAt: Date.now(),
         locationLatitude: latitude,
         locationLongitude: longitude,
+        id: uuid.v4(),
       });
 
       Alert.alert("Success", "Your post has been saved!");
@@ -56,6 +60,7 @@ export default function PostScreen() {
         title: "",
         locationLatitude: latitude,
         locationLongitude: longitude,
+        id: uuid.v4(),
       });
     } catch (error) {
       console.error("Firebase save error:", error);

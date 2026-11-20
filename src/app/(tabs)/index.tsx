@@ -86,6 +86,7 @@ export default function HomeScreen() {
                       longitude: post.locationLongitude,
                     }}
                     title={post.title}
+                    onPress={() => router.push("/post-view")}
                   >
                     <Image
                     source={require("@/assets/images/heartCircle.png")}
