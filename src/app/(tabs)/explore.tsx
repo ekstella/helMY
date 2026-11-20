@@ -41,7 +41,7 @@ export default function TabTwoScreen() {
       contentContainerStyle={[styles.contentContainer, contentPlatformStyle]}
     >
       <ThemedView style={styles.container}>
-        <ThemedView style={styles.titleContainer}>
+        {/* <ThemedView style={styles.titleContainer}>
           <ThemedText type="subtitle">Log in</ThemedText>
           <ThemedText style={styles.centerText} themeColor="textSecondary">
             Or sign up if you don't have an account yet
@@ -60,7 +60,7 @@ export default function TabTwoScreen() {
               <Text style={styles.buttonText}> Log in </Text>
             </Pressable>
           </ThemedView>
-        </ThemedView>
+        </ThemedView> */}
 
         <ThemedView style={styles.sectionsWrapper}></ThemedView>
         {Platform.OS === "web" && <WebBadge />}

@@ -16,6 +16,7 @@ import SignUp from "./sign-up";
 import { ThemedView } from "@/components/themed-view";
 import { Spacing } from "@/constants/theme";
 import { useAuth } from "@/contexts/AuthContext";
+import { useRouter } from "expo-router";
 
 type Props = {
   setIsLoggedIn?: Dispatch<SetStateAction<boolean>>;
@@ -24,6 +25,7 @@ type Props = {
 export default function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
   const { user } = useAuth();
 
@@ -35,62 +37,36 @@ export default function LogIn() {
 
     try {
       await signInWithEmailAndPassword(getAuth(app), email.trim(), password);
-
-      // onAuthStateChanged will update the shared user state.
       alert("Login successful!");
+      router.replace("/(tabs)");
     } catch (error: any) {
       console.error("Login error:", error);
       alert(error.message);
     }
   };
 
-
-
-  //   const [email, setEmail] = React.useState("");
-  //   const [password, setPassword] = React.useState("");
-  //   const [authenticated, setAuthenticated] = React.useState(false);
-  //   const auth = getAuth(app);
-
-  //   const handleLogin = () => {
-  //     if (email == "" || password == "") {
-  //       return alert("Password and email are required");
-  //     }
-
-  //     signInWithEmailAndPassword(auth, email, password)
-  //       .then(async (userCredentials) => {
-  //         const user = userCredentials.user;
-
-  //         await SecureStore.setItemAsync("user", JSON.stringify(user));
-  //         setAuthenticated(true);
-  //       })
-  //       .catch((e) => {
-  //         console.log(e);
-  //       });
-  //   };
-
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <ThemedView style={styles.container}>
-
-            <Text style={styles.title}>Log in Here</Text>
-            <TextInput
-              placeholder="Enter Email"
-              style={styles.input}
-              onChangeText={setEmail}
-              inputMode="email"
-            ></TextInput>
-            <TextInput
-              placeholder="Enter Password"
-              style={styles.input}
-              onChangeText={setPassword}
-              textContentType="password"
-            ></TextInput>
-            <ThemedView style={styles.buttonRow}>
-              <Pressable style={styles.button} onPress={handleLogin}>
-                <Text style={styles.buttonText}>Log In</Text>
-              </Pressable>
-            </ThemedView>
-        )}
+        <Text style={styles.title}>Log in Here</Text>
+        <TextInput
+          placeholder="Enter Email"
+          style={styles.input}
+          onChangeText={setEmail}
+          inputMode="email"
+        ></TextInput>
+        <TextInput
+          placeholder="Enter Password"
+          style={styles.input}
+          onChangeText={setPassword}
+          textContentType="password"
+        ></TextInput>
+        <ThemedView style={styles.buttonRow}>
+          <Pressable style={styles.button} onPress={handleLogin}>
+            <Text style={styles.buttonText}>Log In</Text>
+          </Pressable>
+        </ThemedView>
+        )
       </ThemedView>
     </TouchableWithoutFeedback>
   );

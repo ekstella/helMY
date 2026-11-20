@@ -1,5 +1,5 @@
 import * as Device from "expo-device";
-import { Alert, Platform, StyleSheet } from "react-native";
+import { Alert, Image, Platform, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
@@ -86,7 +86,13 @@ export default function HomeScreen() {
                       longitude: post.locationLongitude,
                     }}
                     title={post.title}
-                  ></Marker>
+                  >
+                    <Image
+                    source={require("@/assets/images/heartCircle.png")}
+                    style={styles.markerImage}
+                    >
+                    </Image>
+                  </Marker>
                 );
               })}
           </MapView>
@@ -154,5 +160,9 @@ const styles = StyleSheet.create({
     right: 4,
     bottom: 30,
     margin: 35,
+  },
+  markerImage: {
+    width: 35,
+    height: 35
   },
 });
