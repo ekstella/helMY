@@ -12,7 +12,8 @@ import { FAB } from "react-native-paper";
 import React from "react";
 import { FontAwesomeFreeSolid } from "@react-native-vector-icons/fontawesome-free-solid";
 import { useRouter } from "expo-router";
-import { getDatabase, ref, onValue } from "@firebase/database";
+import { getDatabase, ref, onValue } from "firebase/database";
+import app from "@/firebaseConfig";
 
 export default function HomeScreen() {
   const [location, setLocation] = useState<Location.LocationObject | null>(
@@ -21,23 +22,39 @@ export default function HomeScreen() {
 
   const router = useRouter();
 
-  const db = getDatabase();
+  const db = getDatabase(app);
 
   type Post = {
+    firebaseKey: string;
     title: string;
     locationLongitude: number;
     locationLatitude: number;
     createdAt: number;
+    id: string;
   };
 
   const [posts, setPosts] = React.useState<Post[]>([]);
 
   useEffect(() => {
     const unsubscribe = onValue(ref(db, "posts"), (snapshot) => {
-      const posts = Object.values(snapshot.val()) as Post[];
-      console.log(posts);
-      setPosts(posts);
+      const posts = snapshot.val();
+      // const posts = Object.values(snapshot.val()) as Post[];
+      // setPosts(posts);
+
+      if (posts) {
+        const postsArray = Object.entries(posts).map(([key, post]) => ({
+          ...(post as Omit<Post, "firebaseKey">),
+          firebaseKey: key,
+        }));
+
+        console.log("Posts: ", postsArray);
+        setPosts(postsArray);
+      } else {
+        setPosts([]);
+      }
     });
+
+    return () => unsubscribe();
   }, []);
 
   useEffect(() => {
@@ -81,18 +98,23 @@ export default function HomeScreen() {
               posts.map((post) => {
                 return (
                   <Marker
+                    key={post.firebaseKey}
                     coordinate={{
                       latitude: post.locationLatitude,
                       longitude: post.locationLongitude,
                     }}
                     title={post.title}
-                    onPress={() => router.push("/post-view")}
+                    onPress={() =>
+                      router.push({
+                        pathname: "/post-view",
+                        params: { firebaseKey: post.firebaseKey },
+                      })
+                    }
                   >
                     <Image
-                    source={require("@/assets/images/heartCircle.png")}
-                    style={styles.markerImage}
-                    >
-                    </Image>
+                      source={require("@/assets/images/heartCircle.png")}
+                      style={styles.markerImage}
+                    ></Image>
                   </Marker>
                 );
               })}
@@ -164,6 +186,6 @@ const styles = StyleSheet.create({
   },
   markerImage: {
     width: 35,
-    height: 35
+    height: 35,
   },
 });
