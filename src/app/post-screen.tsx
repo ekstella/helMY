@@ -82,6 +82,7 @@ export default function PostScreen() {
             placeholder="Write your post here..."
             onChangeText={(text) => setPost({ ...post, title: text })}
             value={post.title}
+            multiline={true}
           ></TextInput>
           <View style={styles.buttonRow}>
             <Button style={styles.button} onPress={handleSave}>

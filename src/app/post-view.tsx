@@ -72,7 +72,7 @@ export default function PostView() {
         <ThemedText style={styles.title}>Post not found</ThemedText>
         <ThemedView style={styles.buttonRow}>
           <Pressable style={styles.button} onPress={() => router.back()}>
-            <ThemedText style={styles.buttonText}>Back to map</ThemedText>
+            <ThemedText style={styles.buttonText}>Go Back</ThemedText>
           </Pressable>
         </ThemedView>
       </ThemedView>
@@ -81,14 +81,12 @@ export default function PostView() {
 
   return (
     <ThemedView style={styles.container}>
-      <ThemedText style={styles.title}>{post.title}</ThemedText>
-      <View style={styles.details}>
-        <ThemedText>
+      <View>
+        <ThemedText style={styles.details}>
           Posted: {new Date(post.createdAt).toLocaleString()}
         </ThemedText>
-        <ThemedText>Latitude: {post.locationLatitude}</ThemedText>
-        <ThemedText>Longitude: {post.locationLongitude}</ThemedText>
       </View>
+      <ThemedText style={styles.title}>{post.title}</ThemedText>
       <ThemedView style={styles.buttonRow}>
         <Pressable style={styles.button} onPress={() => router.back()}>
           <ThemedText style={styles.buttonText}> Back to map </ThemedText>
@@ -107,13 +105,22 @@ const styles = StyleSheet.create({
   },
   details: {
     gap: 10,
+    fontStyle: 'italic',
+    fontSize: 12,
+    textDecorationLine: 'underline'
   },
   title: {
     textAlign: "center",
+    marginTop: 20,
+    marginBottom: 20,
+    fontSize: 25,
   },
   button: {
     backgroundColor: "white",
-    width: 60,
+    width: 100,
+    paddingVertical: 5,
+    paddingHorizontal: 20,
+    borderRadius: 12,
   },
   buttonRow: {
     flexDirection: "row",

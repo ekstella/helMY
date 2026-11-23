@@ -60,6 +60,7 @@ export default function LogIn() {
           style={styles.input}
           onChangeText={setPassword}
           textContentType="password"
+          secureTextEntry={true}
         ></TextInput>
         <ThemedView style={styles.buttonRow}>
           <Pressable style={styles.button} onPress={handleLogin}>
