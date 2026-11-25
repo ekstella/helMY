@@ -93,7 +93,7 @@ export default function TabTwoScreen() {
                 </ThemedText>
                 <ThemedText style={styles.postTitle}>{item.title}</ThemedText>
 
-                <ThemedText style={styles.readMore}>View post</ThemedText>
+                <ThemedText style={styles.link}>View post</ThemedText>
               </Pressable>
             )}
           />
@@ -152,13 +152,14 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     borderColor: "#8E7DBE",
   },
-  readMore: {
-    color: "#3366cc",
+  link: {
+    color: "#8E7DBE",
     fontWeight: "bold",
     marginTop: 5,
+    fontSize: 15,
   },
   postTitle: {
-    color: "black",
+    color: "#521945",
   },
   postDetails: {
     color: "black",
