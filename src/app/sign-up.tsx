@@ -52,7 +52,7 @@ export default function SignUp() {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <ThemedView style={styles.container}>
-        <ThemedText style={styles.title}>Sign Up</ThemedText>
+        <ThemedText style={styles.title}>Sign up</ThemedText>
         <TextInput
           placeholder="Enter Email"
           placeholderTextColor="black"

@@ -49,7 +49,7 @@ export default function LogIn() {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <ThemedView style={styles.container}>
-        <ThemedText style={styles.title}>Log In</ThemedText>
+        <ThemedText style={styles.title}>Log in</ThemedText>
         <TextInput
           placeholder="Enter Email"
           placeholderTextColor="black"
@@ -68,7 +68,7 @@ export default function LogIn() {
         ></TextInput>
         <ThemedView style={styles.buttonRow}>
           <Pressable style={[styles.button, styles.shadowProp]} onPress={handleLogin}>
-            <Text style={styles.buttonText}>Log In</Text>
+            <Text style={styles.buttonText}>Log in</Text>
           </Pressable>
         </ThemedView>
         )
