@@ -73,13 +73,17 @@ export default function HomeScreen() {
     <ThemedView style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
         <ThemedView style={styles.heroSection}>
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;helMY
-          </ThemedText>
+          <ThemedView style={styles.titleRow}>
+            <Image style={styles.titleImage} source={require("@/assets/images/sun.png")}></Image>
+            <ThemedText type="title" style={styles.title}>
+              Welcome to&nbsp;helmy
+            </ThemedText>
+            <Image style={styles.titleImage} source={require("@/assets/images/sun.png")}></Image>
+          </ThemedView>
           <MapView
             style={styles.map}
             initialRegion={{
-              latitude: 60.17083,
+              latitude: 60.19083,
               longitude: 24.9675,
               latitudeDelta: 0.2,
               longitudeDelta: 0.2,
@@ -112,7 +116,7 @@ export default function HomeScreen() {
                     }
                   >
                     <Image
-                      source={require("@/assets/images/heartCircle.png")}
+                      source={require("@/assets/images/location.png")}
                       style={styles.markerImage}
                     ></Image>
                   </Marker>
@@ -121,7 +125,7 @@ export default function HomeScreen() {
           </MapView>
           <FAB
             icon={({ size, color }) => (
-              <FontAwesomeFreeSolid name="heart" size={size} color={color} />
+              <FontAwesomeFreeSolid name="heart" size={size} color="#FC7A1E" />
             )}
             label="Add post"
             onPress={() =>
@@ -131,7 +135,9 @@ export default function HomeScreen() {
             }
             visible={true}
             style={styles.fab}
+            color="#521945"
           ></FAB>
+          <ThemedText>────۶ৎ────</ThemedText>
         </ThemedView>
 
         {Platform.OS === "web" && <WebBadge />}
@@ -163,6 +169,7 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: "center",
+    flexShrink: 1,
   },
   code: {
     textTransform: "uppercase",
@@ -177,15 +184,32 @@ const styles = StyleSheet.create({
   map: {
     width: 350,
     height: 430,
+    borderColor: "#8E7DBE",
+    borderWidth: 5,
+    borderRadius: 7,
   },
   fab: {
     position: "absolute",
     right: 4,
-    bottom: 30,
+    bottom: 10,
     margin: 35,
   },
   markerImage: {
     width: 35,
     height: 35,
+  },
+  titleImage: {
+    width: 35,
+    height: 35,
+    resizeMode: "contain",
+  },
+  titleRow: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    marginVertical: 5,
+    gap: 8,
+    paddingTop: 80,
   },
 });

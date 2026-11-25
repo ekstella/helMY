@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { signOut, getAuth } from "firebase/auth";
 import app from "@/firebaseConfig";
@@ -24,6 +24,10 @@ export default function ProfileScreen() {
     <ThemedView style={styles.container}>
       {user ? (
         <>
+          <Image
+            style={styles.image}
+            source={require("@/assets/images/gift-box.png")}
+          ></Image>
           <ThemedText style={styles.title}>Hello, {user.email}!</ThemedText>
           <ThemedView style={styles.buttonRow}>
             <Pressable style={styles.button} onPress={handleLogout}>
@@ -48,6 +52,7 @@ export default function ProfileScreen() {
               <Text style={styles.buttonText}> Log in </Text>
             </Pressable>
           </ThemedView>
+          <ThemedText style={styles.decoration}>. ݁⋆ ۶ৎ ݁˖ . ݁</ThemedText>
         </ThemedView>
       )}
     </ThemedView>
@@ -63,12 +68,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginVertical: 10,
     gap: 20,
+    paddingBottom: 10,
   },
   button: {
-    backgroundColor: "lightyellow",
+    backgroundColor: "#F1E3D3",
     paddingVertical: 5,
     paddingHorizontal: 20,
-    borderRadius: 12,
+    borderRadius: 19,
   },
   buttonText: {
     color: "black",
@@ -96,5 +102,23 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.four,
     gap: Spacing.four,
     flexDirection: "column",
+  },
+  image: {
+    width: 35,
+    height: 35,
+    resizeMode: "contain",
+  },
+  titleRow: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    marginVertical: 5,
+    gap: 8,
+    paddingTop: 80,
+  },
+  decoration: {
+    textAlign: "center",
+    fontSize: 20,
   },
 });

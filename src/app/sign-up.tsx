@@ -55,12 +55,14 @@ export default function SignUp() {
         <ThemedText style={styles.title}>Sign Up</ThemedText>
         <TextInput
           placeholder="Enter Email"
+          placeholderTextColor="black"
           style={styles.input}
           onChangeText={setEmail}
           inputMode="email"
         ></TextInput>
         <TextInput
           placeholder="Enter Password"
+          placeholderTextColor="black"
           style={styles.input}
           onChangeText={setPassword}
           textContentType="password"
@@ -102,7 +104,7 @@ const styles = StyleSheet.create({
     backgroundColor: "lightyellow",
     paddingVertical: 5,
     paddingHorizontal: 20,
-    borderRadius: 12,
+    borderRadius: 19,
   },
   buttonText: {
     color: "black",
@@ -116,13 +118,14 @@ const styles = StyleSheet.create({
     fontSize: 25,
   },
   input: {
-    height: 100,
-    width: 250,
-    borderColor: "white",
-    borderWidth: 1,
-    color: "white",
-    textAlign: "center",
-  },
+      height: 100,
+      width: 250,
+      borderColor: "#8E7DBE",
+      borderWidth: 4,
+      color: "#F1E3D3",
+      textAlign: "center",
+      backgroundColor: "#F1E3D3",
+    },
   container: {
     alignItems: "center",
     justifyContent: "center",

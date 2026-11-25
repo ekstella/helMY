@@ -89,7 +89,7 @@ export default function PostView() {
       <ThemedText style={styles.title}>{post.title}</ThemedText>
       <ThemedView style={styles.buttonRow}>
         <Pressable style={styles.button} onPress={() => router.back()}>
-          <ThemedText style={styles.buttonText}> Back to map </ThemedText>
+          <ThemedText style={styles.buttonText}> Go back </ThemedText>
         </Pressable>
       </ThemedView>
     </ThemedView>
@@ -107,7 +107,6 @@ const styles = StyleSheet.create({
     gap: 10,
     fontStyle: 'italic',
     fontSize: 12,
-    textDecorationLine: 'underline'
   },
   title: {
     textAlign: "center",
@@ -116,11 +115,12 @@ const styles = StyleSheet.create({
     fontSize: 25,
   },
   button: {
-    backgroundColor: "white",
-    width: 100,
+    backgroundColor: "#F1E3D3",
+    width: 110,
+    height: 55,
     paddingVertical: 5,
     paddingHorizontal: 20,
-    borderRadius: 12,
+    borderRadius: 19,
   },
   buttonRow: {
     flexDirection: "row",
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "black",
-    fontSize: 15,
+    fontSize: 14,
     textAlign: "center",
     marginTop: 10,
     marginBottom: 10,

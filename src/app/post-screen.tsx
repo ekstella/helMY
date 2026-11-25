@@ -1,6 +1,7 @@
 import { ThemedView } from "@/components/themed-view";
 import {
   Alert,
+  Image,
   Keyboard,
   StyleSheet,
   TouchableWithoutFeedback,
@@ -26,7 +27,7 @@ export default function PostScreen() {
   const router = useRouter();
 
   type Post = {
-    id: string
+    id: string;
     title: string;
     locationLongitude: number;
     locationLatitude: number;
@@ -54,7 +55,7 @@ export default function PostScreen() {
         id: uuid.v4(),
       });
 
-      Alert.alert("Success", "Your post has been saved!");
+      Alert.alert("Success!", "Your post is on the map! ˚⟡˖ ࣪");
 
       setPost({
         title: "",
@@ -73,9 +74,15 @@ export default function PostScreen() {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <ThemedView style={styles.container}>
-        <ThemedText type="title" style={styles.title}>
-          Create a post
-        </ThemedText>
+        <ThemedView style={styles.titleRow}>
+          <Image
+            style={styles.image}
+            source={require("@/assets/images/website.png")}
+          ></Image>
+          <ThemedText type="title" style={styles.title}>
+            Create a post
+          </ThemedText>
+        </ThemedView>
         <ThemedView>
           <TextInput
             style={styles.input}
@@ -137,26 +144,42 @@ const styles = StyleSheet.create({
   input: {
     height: 100,
     width: 250,
-    borderColor: "white",
-    borderWidth: 1,
+    borderColor: "#8E7DBE",
+    borderWidth: 5,
     color: "black",
     textAlign: "center",
-  },
-  button: {
-    backgroundColor: "white",
-    width: 60,
   },
   buttonRow: {
     flexDirection: "row",
     justifyContent: "center",
-    marginVertical: 40,
+    marginVertical: 10,
     gap: 20,
+    paddingTop: 40,
+  },
+  button: {
+    backgroundColor: "lightyellow",
+    paddingVertical: 5,
+    paddingHorizontal: 20,
+    borderRadius: 19,
   },
   buttonText: {
     color: "black",
-    fontSize: 15,
+    fontSize: 20,
     textAlign: "center",
     marginTop: 10,
     marginBottom: 10,
+  },
+  image: {
+    width: 35,
+    height: 35,
+    resizeMode: "contain",
+  },
+  titleRow: {
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    marginVertical: 5,
+    gap: 50,
   },
 });

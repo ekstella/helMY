@@ -88,11 +88,10 @@ export default function TabTwoScreen() {
                   })
                 }
               >
-                <ThemedText style={styles.postTitle}>{item.title}</ThemedText>
-
-                <ThemedText style={styles.postTitle}>
+                <ThemedText style={styles.postDetails}>
                   Posted: {new Date(item.createdAt).toLocaleString()}
                 </ThemedText>
+                <ThemedText style={styles.postTitle}>{item.title}</ThemedText>
 
                 <ThemedText style={styles.readMore}>View post</ThemedText>
               </Pressable>
@@ -142,14 +141,16 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   list: {
-    gap: 15,
+    gap: 20,
     paddingBottom: 30,
   },
   post: {
     padding: 16,
     borderRadius: 12,
-    backgroundColor: "#eeeeee",
+    backgroundColor: "#F1E3D3",
     gap: 8,
+    borderWidth: 4,
+    borderColor: "#8E7DBE",
   },
   readMore: {
     color: "#3366cc",
@@ -158,5 +159,10 @@ const styles = StyleSheet.create({
   },
   postTitle: {
     color: "black",
-  }
+  },
+  postDetails: {
+    color: "black",
+    fontStyle: "italic",
+    fontSize: 12,
+  },
 });
