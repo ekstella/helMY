@@ -69,7 +69,7 @@ export default function SignUp() {
         ></TextInput>
         <ThemedView style={styles.buttonRow}>
           <Pressable
-            style={styles.button}
+            style={[styles.button, styles.shadowProp]}
             onPress={() => {
               {
                 handleRegister;
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
       width: 250,
       borderColor: "#8E7DBE",
       borderWidth: 4,
-      color: "#F1E3D3",
+      color: "black",
       textAlign: "center",
       backgroundColor: "#F1E3D3",
     },
@@ -133,5 +133,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.four,
     gap: Spacing.four,
     flexDirection: "column",
+  },
+  shadowProp: {
+    shadowColor: "#171717",
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
   },
 });

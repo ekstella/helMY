@@ -79,20 +79,20 @@ export default function PostScreen() {
             style={styles.image}
             source={require("@/assets/images/website.png")}
           ></Image>
-          <ThemedText type="title" style={styles.title}>
+          <ThemedText type="title" style={[styles.title, styles.shadowProp]}>
             Create a post
           </ThemedText>
         </ThemedView>
         <ThemedView>
           <TextInput
-            style={styles.input}
+            style={[styles.input, styles.shadowProp]}
             placeholder="Write your post here..."
             onChangeText={(text) => setPost({ ...post, title: text })}
             value={post.title}
             multiline={true}
           ></TextInput>
           <View style={styles.buttonRow}>
-            <Button style={styles.button} onPress={handleSave}>
+            <Button style={[styles.button, styles.shadowProp]} onPress={handleSave}>
               <Text style={styles.buttonText}>Post</Text>
             </Button>
           </View>
@@ -181,5 +181,11 @@ const styles = StyleSheet.create({
     width: "100%",
     marginVertical: 5,
     gap: 50,
+  },
+  shadowProp: {
+    shadowColor: "#171717",
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
   },
 });

@@ -81,14 +81,14 @@ export default function PostView() {
 
   return (
     <ThemedView style={styles.container}>
-      <View>
-        <ThemedText style={styles.details}>
-          Posted: {new Date(post.createdAt).toLocaleString()}
-        </ThemedText>
-      </View>
-      <ThemedText style={styles.title}>{post.title}</ThemedText>
+      <ThemedText style={styles.details}>
+        Posted: {new Date(post.createdAt).toLocaleString()}
+      </ThemedText>
+      <ThemedView style={[styles.post, styles.shadowProp]}>
+        <ThemedText style={styles.title}>{post.title}</ThemedText>
+      </ThemedView>
       <ThemedView style={styles.buttonRow}>
-        <Pressable style={styles.button} onPress={() => router.back()}>
+        <Pressable style={[styles.button, styles.shadowProp]} onPress={() => router.back()}>
           <ThemedText style={styles.buttonText}> Go back </ThemedText>
         </Pressable>
       </ThemedView>
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   },
   details: {
     gap: 10,
-    fontStyle: 'italic',
+    fontStyle: "italic",
     fontSize: 12,
   },
   title: {
@@ -113,26 +113,41 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 20,
     fontSize: 25,
-  },
-  button: {
-    backgroundColor: "#F1E3D3",
-    width: 110,
-    height: 55,
-    paddingVertical: 5,
-    paddingHorizontal: 20,
-    borderRadius: 19,
+    color: "#521945",
   },
   buttonRow: {
     flexDirection: "row",
     justifyContent: "center",
-    marginVertical: 40,
+    marginVertical: 10,
     gap: 20,
+    paddingTop: 40,
+  },
+  button: {
+    backgroundColor: "#F1E3D3",
+    paddingVertical: 5,
+    paddingHorizontal: 20,
+    borderRadius: 19,
   },
   buttonText: {
     color: "black",
-    fontSize: 14,
+    fontSize: 20,
     textAlign: "center",
     marginTop: 10,
     marginBottom: 10,
+  },
+  post: {
+    paddingVertical: 20,
+    paddingHorizontal: 10,
+    borderWidth: 4,
+    borderColor: "#8E7DBE",
+    backgroundColor: "#F1E3D3",
+    borderRadius: 12,
+    marginVertical: 10,
+  },
+  shadowProp: {
+    shadowColor: "#171717",
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
   },
 });

@@ -80,7 +80,7 @@ export default function TabTwoScreen() {
             contentContainerStyle={styles.list}
             renderItem={({ item }) => (
               <Pressable
-                style={styles.post}
+                style={[styles.post, styles.shadowProp]}
                 onPress={() =>
                   router.push({
                     pathname: "/post-view",
@@ -164,5 +164,11 @@ const styles = StyleSheet.create({
     color: "black",
     fontStyle: "italic",
     fontSize: 12,
+  },
+  shadowProp: {
+    shadowColor: "#171717",
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
   },
 });

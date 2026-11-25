@@ -30,7 +30,7 @@ export default function ProfileScreen() {
           ></Image>
           <ThemedText style={styles.title}>Hello, {user.email}!</ThemedText>
           <ThemedView style={styles.buttonRow}>
-            <Pressable style={styles.button} onPress={handleLogout}>
+            <Pressable style={[styles.button, styles.shadowProp]} onPress={handleLogout}>
               <Text style={styles.buttonText}>Log out</Text>
             </Pressable>
           </ThemedView>
@@ -40,13 +40,13 @@ export default function ProfileScreen() {
           <ThemedText style={styles.title}>You are not logged in</ThemedText>
           <ThemedView style={styles.buttonRow}>
             <Pressable
-              style={styles.button}
+              style={[styles.button, styles.shadowProp]}
               onPress={() => router.push("/sign-up")}
             >
               <Text style={styles.buttonText}> Sign up </Text>
             </Pressable>
             <Pressable
-              style={styles.button}
+              style={[styles.button, styles.shadowProp]}
               onPress={() => router.push("/log-in")}
             >
               <Text style={styles.buttonText}> Log in </Text>
@@ -120,5 +120,11 @@ const styles = StyleSheet.create({
   decoration: {
     textAlign: "center",
     fontSize: 20,
+  },
+  shadowProp: {
+    shadowColor: "#171717",
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
   },
 });

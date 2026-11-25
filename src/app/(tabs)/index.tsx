@@ -75,13 +75,13 @@ export default function HomeScreen() {
         <ThemedView style={styles.heroSection}>
           <ThemedView style={styles.titleRow}>
             <Image style={styles.titleImage} source={require("@/assets/images/sun.png")}></Image>
-            <ThemedText type="title" style={styles.title}>
+            <ThemedText type="title" style={[styles.title, styles.shadowProp]}>
               Welcome to&nbsp;helmy
             </ThemedText>
             <Image style={styles.titleImage} source={require("@/assets/images/sun.png")}></Image>
           </ThemedView>
           <MapView
-            style={styles.map}
+            style={[styles.map, styles.shadowProp]}
             initialRegion={{
               latitude: 60.19083,
               longitude: 24.9675,
@@ -211,5 +211,11 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     gap: 8,
     paddingTop: 80,
+  },
+  shadowProp: {
+    shadowColor: "#171717",
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
   },
 });
